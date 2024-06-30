@@ -4,7 +4,8 @@ import os
 class Config:
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:auca%402023@127.0.0.1:3306/car_rent_management_alx'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    PERMANENT_SESSION_LIFETIME = datetime.timedelta(seconds=60)
+    # PERMANENT_SESSION_LIFETIME = datetime.timedelta(seconds=60)
+    PERMANENT_SESSION_LIFETIME = datetime.timedelta(seconds=180)
     SECRET_KEY = 'auca@2023'
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
