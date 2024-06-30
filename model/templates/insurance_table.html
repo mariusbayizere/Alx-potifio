@@ -1,0 +1,126 @@
+{% extends 'headerFooter.html' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Insurance Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        body{
+            font-family: 'Outfit';
+        }
+        .card {
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .action-column {
+            width: 200px;
+        }
+
+        .table {
+            table-layout: fixed; /* Fix table layout to enable column width control */
+            display: block;
+            gap: 25px;
+        }
+        .table td, .table th {
+            overflow: hidden; /* Hide overflow to prevent text wrapping */
+            text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+        .action-column {
+            width: 200px; /* Adjust the width of action column */
+        }
+        body{
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+        .btn-group {
+            display: flex; /* Use flexbox for button group */
+            justify-content: center; /* Center align buttons horizontally */
+        }
+        .btn-group .btn {
+            margin: 2px; /* Add margin to buttons */
+            gap: 20px;
+        }
+        .container a {
+            margin-bottom: 20px;
+        }
+        /* New styles to ensure footer is properly positioned */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1;
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mt-5">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Insurance Data</h2>
+            </div>
+            <div class="card-body">
+                <a href="{{ url_for('add_insurance') }}" class="btn btn-primary mb-3">Add Insurance</a>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Insurance ID</th>
+                                <th>Coverage Type</th>
+                                <th>Insurance Company</th>
+                                <th>Premium Amount</th>
+                                <th class="action-column">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for insurance in insurances %}
+                                <tr>
+                                    <td>{{ insurance.insurance_ID }}</td>
+                                    <td>{{ insurance.coverage_type }}</td>
+                                    <td>{{ insurance.Insurance_company }}</td>
+                                    <td>{{ insurance.premium_amount }}</td>
+                                    <td class="action-column">
+                                        <a href="{{ url_for('update_insurance', insurance_id=insurance.insurance_ID) }}" class="btn btn-primary btn-sm">Update</a>
+                                        <form action="{{ url_for('delete_insurance', insurance_id=insurance.insurance_ID) }}" method="post" style="display: inline;">
+                                            <button type="submit" class="btn btn-danger btn-sm ml-2" style="margin-top: -20px;">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{%endblock%}

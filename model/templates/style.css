@@ -1,0 +1,14 @@
+    .small-width {
+        max-width: 800px; 
+    }
+    .container .alert {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    .container .card{
+        width:800px;
+    }
+    .container .form-group{
+        width:500px;
+    }

@@ -1,0 +1,124 @@
+{% extends 'formore_infomation.html' %}
+
+{% block title %}Payments{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Payment Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .table {
+            table-layout: fixed;
+            display: block;
+            gap: 25px;
+        }
+        .table td, .table th {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .payment-id-column {
+            width: 150px;
+        }
+        .action-column {
+            width: 200px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+        }
+        .btn-group .btn {
+            margin: 2px;
+            gap: 20px;
+        }
+        .container a {
+            margin-bottom: 20px;
+        }
+        body{
+            font-family: 'Outfit', Arial, sans-serif;
+        }
+        .btn-group {
+            display: flex; /* Use flexbox for button group */
+            justify-content: center; /* Center align buttons horizontally */
+        }
+        .btn-group .btn {
+            margin: 2px; /* Add margin to buttons */
+            gap: 20px;
+        }
+        .container a {
+            margin-bottom: 20px;
+        }
+        /* New styles to ensure footer is properly positioned */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            flex: 1;
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-4 mb-4">Payment Data</h2>
+        <a href="{{ url_for('add_payment') }}" class="btn btn-primary btn-sm mx-1">Add Payment</a>
+        <div class="table">
+            <table class="table table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Payment Date</th>
+                        <th>Payment Method</th>
+                        <th>Rental ID</th>
+                        <th>Amount Paid</th>
+                        <th>Card Number</th>
+                        <th>CVV</th>
+                        <th>Expiry Date</th>
+                        <th class="action-column">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payments %}
+                        <tr>
+                            <td>{{ payment.payment_ID }}</td>
+                            <td>{{ payment.payment_date }}</td>
+                            <td>{{ payment.payment_method }}</td>
+                            <td>{{ payment.rental_id }}</td>
+                            <td>{{ payment.amount_paid }}</td>
+                            <td>{{ payment.card_number }}</td>
+                            <td>{{ payment.cvv }}</td>
+                            <td>{{ payment.expiry_date }}</td>
+                            <td class="action-column">
+                                <div class="btn-group" role="group">
+                                    <a href="{{ url_for('update_payment', payment_id=payment.payment_ID) }}" class="btn btn-primary btn-sm mx-1">Update</a>
+                                    <form action="{{ url_for('delete_payment', payment_id=payment.payment_ID) }}" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-danger btn-sm ml-2">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

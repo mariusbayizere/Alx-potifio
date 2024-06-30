@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Car Rental{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a href="#"><img src="{{ url_for('static', filename='images/cover0.jpeg') }}" alt="Facebook" style="width:35px; border-radius:20px"></a>
+        <a class="navbar-brand" href="{{ url_for('display_cars') }}">Car Rental</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('display_cars') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('display_cars') }}">Cars</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('About') }}">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('Contacts') }}">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Log out</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+<style>
+    .navbar{
+        display:flex;
+        gap:20px;
+    }
+    .navbar{
+        padding-left: 50px;
+
+    }
+    .collapse li{
+        display:block;
+        padding-right:30px;
+    }
+    body {
+        font-family: 'Outfit', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+    .main-container {
+        text-align: center;
+        color: white;
+        position: relative;
+    }
+    .images img {
+        width: 100%;
+        height: auto;
+    }
+    .images img{
+        width: 106.25rem;
+        height: 49.375rem;
+    }
+        .jumbotron {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        .jumbotron h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .jumbotron p {
+            font-size: 1.25rem;
+        }
+
+        .search-sidebar {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-img-top {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            text-align: center;
+        }
+        .pagination .page-item .page-link {
+            color: #007bff;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+
+    <div class="main-container">
+    <div class="images">
+        <img src="{{ url_for('static', filename='images/Number1.jpg') }}" alt="Cover Image">
+    </div>
+
+    <div class="jumbotron text-center Position" style="background-image: +'); background-size: cover; color: white; padding: 4rem 2rem;">
+        <h1>Compact Yet Mighty</h1>
+        <p>The Toyota Corolla offers reliability and style in a compact package. Ideal for navigating the urban jungle with ease and comfort.</p>
+    </div>
+</div>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 Car Rental Management System</p>
+        <div>
+            <a href="https://www.google.com/search?q=facebook&sca_esv=3ccb936e91fffbe3&sca_upv=1&rlz=1C1KNTJ_enRW1077RW1079&sxsrf=ADLYWILDJ0JUeP_wN-m7r64bS5CdpTXaJg%3A1718993825219&ei=ocN1ZtGKDfb_i-gPlLGv2AI&oq=face&gs_lp=Egxnd3Mtd2l6LXNlcnAiBGZhY2UqAggAMhAQABiABBixAxhDGIMBGIoFMhAQABiABBixAxhDGIMBGIoFMgoQABiABBhDGIoFMgoQABiABBhDGIoFMg0QABiABBixAxhDGIoFMggQABiABBixAzIIEAAYgAQYsQMyCBAAGIAEGLEDMgUQABiABDIFEAAYgARIszpQhg5YqiJwAngAkAEBmAHQB6AB2iCqAQM2LTW4AQHIAQD4AQGYAgWgAqwTqAIUwgIKEAAYsAMY1gQYR8ICDRAAGIAEGLADGEMYigXCAhMQLhiABBiwAxjRAxhDGMcBGIoFwgIHECMYJxjqAsICExAAGIAEGEMYtAIYigUY6gLYAQHCAhkQLhiABBjRAxhDGLQCGMcBGIoFGOoC2AEBwgILEAAYgAQYsQMYgwHCAg4QABiABBixAxiDARiKBcICDhAuGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwGYAxWIBgGQBgq6BgYIARABGAGSBwcyLjUtMi4xoAegKA&sclient=gws-wiz-serp"><img src="{{ url_for('static', filename='facebook.png') }}" alt="Facebook" style="width:30px; border-radius:8px"></a>
+            <a href="https://www.google.com/search?q=twitter&rlz=1C1KNTJ_enRW1077RW1079&oq=&gs_lcrp=EgZjaHJvbWUqBggBEEUYOzIPCAAQRRg5GIMBGLEDGIAEMgYIARBFGDsyDQgCEAAYgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBwgEEAAYgAQyBwgFEAAYgAQyBggGEEUYPTIGCAcQRRg90gEINjc2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8"><img src="{{ url_for('static', filename='tweeter.png') }}" alt="Twitter" style="width:30px; border-radius:8px"></a>
+            <a href="https://www.google.com/search?q=instagram&rlz=1C1KNTJ_enRW1077RW1079&oq=in&gs_lcrp=EgZjaHJvbWUqDQgBEAAYgwEYsQMYgAQyCQgAEEUYORiABDINCAEQABiDARixAxiABDINCAIQABixAxiABBiKBTIQCAMQABiDARixAxiABBiKBTINCAQQABiDARixAxiABDIGCAUQRRg9MgYIBhBFGDwyBggHEEUYPNIBCDM1MjhqMGo3qAIIsAIB&sourceid=chrome&ie=UTF-8"><img src="{{ url_for('static', filename='instagramLog.png') }}" alt="Instagram" style="width:30px; border-radius:8px"></a>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

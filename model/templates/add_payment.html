@@ -1,0 +1,178 @@
+{% extends 'headerFooter.html' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Add Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    .container .form-group {
+        width: 600px;
+    }
+    .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+    .container {
+        margin-bottom: 40px;
+    }
+    .payment-logo {
+        display: none;
+        width: 40px;
+        padding-top: 15px;
+        border-radius:5px;
+        margin-left: 10px;
+    }
+    body{
+        font-family: 'Outfit', Arial, sans-serif;
+    }
+</style>
+<body>
+    <div class="container">
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mt-5">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="card small-width">
+            <div class="card-header">
+                <h1>Add Payment</h1>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_payment') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.payment_date.label(class="form-control-label") }}
+                        {{ form.payment_date(class="form-control") }}
+                        {% for error in form.payment_date.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.payment_method.label(class="form-control-label") }}
+                        {{ form.payment_method(class="form-control") }}
+                        <img id="payment-logo" class="payment-logo" src="" alt="Payment Method Logo">
+                        {% for error in form.payment_method.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.rental_id.label(class="form-control-label") }}
+                        {{ form.rental_id(class="form-control") }}
+                        {% for error in form.rental_id.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.amount_paid.label(class="form-control-label") }}
+                        {{ form.amount_paid(class="form-control", readonly=True) }}
+                        {% for error in form.amount_paid.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group" id="card-number-group" style="display: none;">
+                        {{ form.card_number.label(class="form-control-label") }}
+                        {{ form.card_number(class="form-control") }}
+                        {% for error in form.card_number.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group" id="cvv-group" style="display: none;">
+                        {{ form.cvv.label(class="form-control-label") }}
+                        {{ form.cvv(class="form-control") }}
+                        {% for error in form.cvv.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group" id="expiry-date-group" style="display: none;">
+                        {{ form.expiry_date.label(class="form-control-label") }}
+                        {{ form.expiry_date(class="form-control") }}
+                        {% for error in form.expiry_date.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const rentalIdInput = document.querySelector('input[name="rental_id"]');
+            const amountPaidInput = document.querySelector('input[name="amount_paid"]');
+            const paymentMethodSelect = document.querySelector('select[name="payment_method"]');
+            const cardNumberGroup = document.getElementById('card-number-group');
+            const cvvGroup = document.getElementById('cvv-group');
+            const expiryDateGroup = document.getElementById('expiry-date-group');
+            const paymentLogo = document.getElementById('payment-logo');
+
+            rentalIdInput.addEventListener('change', function() {
+                const rentalId = rentalIdInput.value;
+                if (rentalId) {
+                    fetch(`/get_rental_cost/${rentalId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                amountPaidInput.value = data.total_rental_cost;
+                            } else {
+                                amountPaidInput.value = '';
+                                alert(data.error);
+                            }
+                        })
+                        .catch(error => {
+                            amountPaidInput.value = '';
+                            alert('An error occurred while fetching rental cost');
+                            console.error('Error:', error);
+                        });
+                }
+            });
+
+            paymentMethodSelect.addEventListener('change', function() {
+                const selectedMethod = paymentMethodSelect.value;
+                let showCardFields = false;
+                let logoSrc = '';
+
+                switch (selectedMethod) {
+                    case 'VISA':
+                        showCardFields = true;
+                        logoSrc = '{{ url_for('static', filename='/visa.png') }}';
+                        break;
+                    case 'CREDIT':
+                        showCardFields = true;
+                        logoSrc = '{{ url_for('static', filename='/creditCard.png') }}';
+                        break;
+                    case 'DEBIT':
+                        showCardFields = true;
+                        logoSrc = '{{ url_for('static', filename='/debit.png') }}';
+                        break;
+                    default:
+                        showCardFields = false;
+                        logoSrc = '';
+                        break;
+                }
+                cardNumberGroup.style.display = showCardFields ? 'block' : 'none';
+                cvvGroup.style.display = showCardFields ? 'block' : 'none';
+                expiryDateGroup.style.display = showCardFields ? 'block' : 'none';
+                paymentLogo.src = logoSrc;
+                paymentLogo.style.display = logoSrc ? 'inline' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

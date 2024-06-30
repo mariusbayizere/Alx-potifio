@@ -1,0 +1,53 @@
+<!-- templates/404.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Not Found</title>
+</head>
+<style>
+    /* body{
+        display: flex;
+        align-items:center;
+        justify-content:center;
+        
+
+    } */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url('/static/images/cover0.jpeg');
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        font-family: 'Outfit',Arial, sans-serif;
+    }
+    .container {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 2em;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .container a{
+        text-decoration: none
+    }
+  /*  .main{
+        margin-top:15.625rem;
+        width:23.75rem;
+        height:11.875rem;
+        background-color: red;
+        text-align: center;
+    }*/
+</style>
+<body>
+    <div class="container">
+        <h1>404 - Page Not Found</h1>
+        <p>Sorry, the page you are looking for does not exist.</p>
+        <a href="/cars">Go to Home</a>
+    </div>
+</body>
+</html>

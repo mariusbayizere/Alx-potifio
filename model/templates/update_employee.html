@@ -1,0 +1,87 @@
+{% extends 'headerFooter.html' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Update Employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    .container .form-group {
+        width: 500px;
+    }
+    body{
+        font-family: 'Outfit';
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="card mt-5 small-width">
+            <div class="card-header">
+                <h1>Update Employee</h1>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('update_employee', employee_id=employee_id) }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.employee_ID.label(class="form-control-label") }}
+                        {{ form.employee_ID(class="form-control") }}
+                        {% for error in form.employee_ID.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.First_name.label(class="form-control-label") }}
+                        {{ form.First_name(class="form-control") }}
+                        {% for error in form.First_name.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.Last_name.label(class="form-control-label") }}
+                        {{ form.Last_name(class="form-control") }}
+                        {% for error in form.Last_name.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.country_code.label(class="form-control-label") }}
+                        {{ form.country_code(class="form-control") }}
+                        {% for error in form.country_code.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.TelephoneNumber.label(class="form-control-label") }}
+                        {{ form.TelephoneNumber(class="form-control") }}
+                        {% for error in form.TelephoneNumber.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.position.label(class="form-control-label") }}
+                        {{ form.position(class="form-control") }}
+                        {% for error in form.position.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.location_id.label(class="form-control-label") }}
+                        {{ form.location_id(class="form-control") }}
+                        {% for error in form.location_id.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Employee</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{%endblock%}

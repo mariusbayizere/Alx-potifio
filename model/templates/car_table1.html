@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block content %}
+<style>
+        .search-form h5{
+            margin-left:-125px;
+            font-weight:600;
+        }
+        .form-group {
+            padding-left:-100px;
+            margin-bottom: 15px;
+        }
+        .form-check {
+            margin-bottom: 10px;
+        }
+        .form-check-label {
+            margin-left: 5px;
+        }
+        
+        h4{
+            margin-left: 5px;
+            margin-left: -125px;
+            font-weight:600;
+        }
+        
+        h5 {
+            margin-top: 10px;
+           
+        
+        }
+        
+        .row .col-md-3 .search-sidebar{
+            padding-left:200px;
+            margin-left:-50px;
+        }
+        #all, #bmw, #toyota, #hyundai, #ford{
+            margin-left:-163px;
+        }
+        #bmw{
+            margin-left:-150px;
+        }
+        #ford{
+            margin-left:-37px;
+        }
+        #hyundai{
+            margin-left:-80px;
+        }
+        #toyota{
+            margin-left:-99px;
+        }
+        
+        .all{
+            margin-left:-126px;
+        }
+        .bmw{
+            margin-left:-114px;
+        }
+        .toyota{
+            margin-left:-68px;
+        }
+        .hyundai{
+            margin-left:-40px;
+        }
+        .ford{
+            margin-left:-1px;
+        }
+        #volkswagen{
+            margin-left:-53px;
+        }
+        .volkswagen{
+            margin-left:-16px;
+        }
+        #mercedes{
+            margin-left:-73px;
+        }
+        .mercedes{
+            margin-left:-40px;
+        }
+        #modelAZ{
+            margin-left:-209px;
+        }
+        .modelAZ{
+            margin-left:-190px;
+        }
+        .priceLowHigh{
+            margin-left:-170px;
+        }
+        .priceHighLow{
+            margin-left:-182px;
+        }
+        .yearOldNew{
+            margin-left:-90px;
+        }
+        #yearOldNew{
+            margin-left:-115px;
+        }
+        .yearNewOld{
+            margin-left:-100px;
+        }
+        #yearNewOld{
+            margin-left:-121px;
+        }
+        .mileageLowHigh{
+            margin-left:-100px;
+        }
+        #mileageLowHigh{
+            margin-left:-125px;
+        }
+        .mileageHighLow{
+            margin-left:-20px;
+        }
+        #mileageHighLow{
+            margin-left:-40px;
+        }
+        .card-body h5{
+            display:flex;
+            font-weight:700;
+            margin-left:20px;
+        }
+        .card-body .card-text{
+            display:flex;
+            margin-left:-8px;
+        }
+        .card-body a{
+            margin-left:-130px;
+        }
+        .container-fluid{
+            margin-left:-120px;
+            margin-right:-200px;
+            display:flex;
+            justify-content: space-between;
+            gap:20px;
+        }
+          .card-body{
+            margin-right:-70px;
+            
+        }
+        .card{
+            width:260px;
+        }
+        .putting-space{
+            margin-right:60px;
+        
+        }
+        .putting-gaps{
+            display:flex;
+            flex-wrap: wrap;
+        }
+        
+        #priceHighLow{
+            margin-left:-107px;
+        }
+        .priceHighLow{
+            margin-left:-80px;
+        }
+        
+        #priceLowHigh{
+            margin-left:-107px;
+        }
+        .priceLowHigh{
+            margin-left:-80px;
+        }
+        #mileageHighLow{
+            margin-left:-135px;
+        }
+        .mileageHighLow{
+            margin-left:-110px;
+        }
+        #all{
+        margin-left:-255px;
+        }
+        .all{
+            margin-left:-230px;
+            }
+        
+        .toyota{
+                margin-left: -200;
+            }
+        #bmw{
+            margin-left:-240px;
+        }
+        .bmw{
+            margin-left:-216px;
+        }
+        #hyundai{
+            margin-left:-175px;
+        }
+        .hyundai{
+            margin-left:-150px;
+        }
+        #ford{
+            margin-left:-126px;
+        }
+        .ford{
+            margin-left:-100px;
+        }
+        #volkswagen{
+            margin-left: -150px;
+        }
+        .volkswagen{
+            margin-left: -125px;
+        }
+        #mercedes{
+            margin-left: -175px;
+        }
+        .mercedes{
+            margin-left: -150px;
+        }
+        .toyotas{
+            margin-left:-160px;
+        }
+        #toyotas{
+            margin-left:-185px;
+        }
+        .search_button{
+            display:flex;
+            justify-content: center;
+        }
+        .length_input{
+            width: 220px;
+        }
+        .pagination{
+            display:flex;
+            justify-content: center;
+            margin-left:630px;
+        }
+/* Your existing CSS */
+</style>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-3 search-sidebar">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Search</h4>
+                        <form class="search-form" method="get" action="{{ url_for('search_cars') }}">
+                            <div class="form-group">
+                                <input type="text" name="searchQuery" class="form-control length_input" placeholder="Search car..." value="{{ search_query }}">
+                            </div>
+                            <h5>Sort By</h5>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sortOption" id="modelAZ" value="modelAZ" {% if sort_option == 'modelAZ' %}checked{% endif %}>
+                                    <label class="form-check-label modelAZ" for="modelAZ">
+                                        Model A-Z
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sortOption" id="priceLowHigh" value="priceLowHigh" {% if sort_option == 'priceLowHigh' %}checked{% endif %}>
+                                    <label class="form-check-label priceLowHigh" for="priceLowHigh">
+                                        Price: Lowest to Highest
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sortOption" id="priceHighLow" value="priceHighLow" {% if sort_option == 'priceHighLow' %}checked{% endif %}>
+                                    <label class="form-check-label priceHighLow" for="priceHighLow">
+                                        Price: Highest to Lowest
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sortOption" id="yearOldNew" value="yearOldNew" {% if sort_option == 'yearOldNew' %}checked{% endif %}>
+                                    <label class="form-check-label yearOldNew" for="yearOldNew">
+                                        Year: Oldest to Newest
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sortOption" id="yearNewOld" value="yearNewOld" {% if sort_option == 'yearNewOld' %}checked{% endif %}>
+                                    <label class="form-check-label yearNewOld" for="yearNewOld">
+                                        Year: Newest to Oldest
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sortOption" id="mileageLowHigh" value="mileageLowHigh" {% if sort_option == 'mileageLowHigh' %}checked{% endif %}>
+                                    <label class="form-check-label mileageLowHigh" for="mileageLowHigh">
+                                        Mileage: Low to High
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sortOption" id="mileageHighLow" value="mileageHighLow" {% if sort_option == 'mileageHighLow' %}checked{% endif %}>
+                                    <label class="form-check-label mileageHighLow" for="mileageHighLow">
+                                        Mileage: High to Low
+                                    </label>
+                                </div>
+                            </div>
+                            <h5>Industry</h5>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="industryOption" id="all" value="all" {% if industry_option == 'all' %}checked{% endif %}>
+                                    <label class="form-check-label all" for="all">
+                                        All
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="industryOption" id="toyotas" value="toyota" {% if industry_option == 'toyota' %}checked{% endif %}>
+                                    <label class="form-check-label toyotas" for="toyota">
+                                        Toyota Motor
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="industryOption" id="bmw" value="bmw" {% if industry_option == 'bmw' %}checked{% endif %}>
+                                    <label class="form-check-label bmw" for="bmw">
+                                        BMW
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="industryOption" id="hyundai" value="hyundai" {% if industry_option == 'hyundai' %}checked{% endif %}>
+                                    <label class="form-check-label hyundai" for="hyundai">
+                                        Hyundai Motor
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="industryOption" id="ford" value="ford" {% if industry_option == 'ford' %}checked{% endif %}>
+                                    <label class="form-check-label ford" for="ford">
+                                        Ford Motor Company
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="industryOption" id="volkswagen" value="volkswagen" {% if industry_option == 'volkswagen' %}checked{% endif %}>
+                                    <label class="form-check-label volkswagen" for="volkswagen">
+                                        Volkswagen Group
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="industryOption" id="mercedes" value="mercedes" {% if industry_option == 'mercedes' %}checked{% endif %}>
+                                    <label class="form-check-label mercedes" for="mercedes">
+                                        Mercedes Benz
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary search_button">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 putting-gap">
+                <div class="row putting-gaps">
+                    {% for car in cars %}
+                    <div class="col-md-3 putting-space">
+                        <div class="card mb-4">
+                            <img class="card-img-top" src="{{ car.image }}" alt="Car image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ car.make }} {{ car.model }}</h5>
+                                <p class="card-text">Year: {{ car.years }}</p>
+                                <p class="card-text">Color: {{ car.color }}</p>
+                                <p class="card-text">Plaque: {{ car.car_ID }}</p>
+                                <p class="card-text">Price per day: RWF {{ car.rental_price_per_day }}</p>
+                                <p class="card-text">Car Status: {{ car.car_status }}</p>
+                                <a href="{{ url_for('add_rental') }}" class="btn btn-primary">Rent Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% if page > 1 %}
+                        <li class="page-item"><a class="page-link" href="{{ url_for('search_cars', page=page-1, searchQuery=search_query, sortOption=sort_option, industryOption=industry_option) }}">Previous</a></li>
+                        {% endif %}
+                        {% for p in range(1, total_pages + 1) %}
+                        <li class="page-item{% if p == page %} active{% endif %}"><a class="page-link" href="{{ url_for('search_cars', page=p, searchQuery=search_query, sortOption=sort_option, industryOption=industry_option) }}">{{ p }}</a></li>
+                        {% endfor %}
+                        {% if page < total_pages %}
+                        <li class="page-item"><a class="page-link" href="{{ url_for('search_cars', page=page+1, searchQuery=search_query, sortOption=sort_option, industryOption=industry_option) }}">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+{% endblock %}

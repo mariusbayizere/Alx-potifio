@@ -1,0 +1,129 @@
+{% extends 'headerFooter.html' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Add Rental</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    .container .form-group {
+        width: 500px;
+    }
+    .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+        display:flex;
+        justify-content: center;
+        align-item:center;
+        width: 900px;
+
+    }
+    .container {
+        margin-bottom: 40px;
+    }
+    body{
+        font-family: 'Outfit', Arial, sans-serif;
+    }
+</style>
+<body>
+    <div class="container">
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mt-5">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="card small-width">
+            <div class="card-header">
+                <h1>Add Rental</h1>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_rental') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.rental_start_date.label(class="form-control-label") }}
+                        {{ form.rental_start_date(class="form-control") }}
+                        {% for error in form.rental_start_date.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.return_date.label(class="form-control-label") }}
+                        {{ form.return_date(class="form-control") }}
+                        {% for error in form.return_date.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.total_rental_cost.label(class="form-control-label") }}
+                        {{ form.total_rental_cost(class="form-control") }}
+                        {% for error in form.total_rental_cost.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.payment_status.label(class="form-control-label") }}
+                        {{ form.payment_status(class="form-control") }}
+                        {% for error in form.payment_status.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.employee_ID.label(class="form-control-label") }}
+                        <select class="form-control" name="employee_ID">
+                            {% for employee in employees %}
+                                <option value="{{ employee.employee_ID }}">{{ employee.First_name }} {{ employee.Last_name }} ({{ employee.position }})</option>
+                            {% endfor %}
+                        </select>
+                        {% for error in form.employee_ID.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.car_ID.label(class="form-control-label") }}
+                        <select class="form-control" name="car_ID">
+                            {% for car in cars %}
+                                <option value="{{ car.car_ID }}">{{ car.car_ID }} - {{ car.make }} {{ car.model }} ({{ car.color }})</option>
+                            {% endfor %}
+                        </select>
+                        {% for error in form.car_ID.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.customer_id.label(class="form-control-label") }}
+                        {{ form.customer_id(class="form-control") }}
+                        {% for error in form.customer_id.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Rental</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to set the total rental cost value
+        document.addEventListener("DOMContentLoaded", function() {
+            const totalRentalCost = {{ total_rental_cost | tojson }};
+            const totalRentalCostInput = document.querySelector('input[name="total_rental_cost"]');
+            totalRentalCostInput.value = totalRentalCost;
+        });
+    </script>
+</body>
+</html>
+{% endblock %}
+

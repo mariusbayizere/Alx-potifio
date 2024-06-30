@@ -1,0 +1,112 @@
+{% extends 'headerFooter.html' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Add Insurance</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    .container .form-group{
+        width: 600px;
+    }
+    body{
+        font-family: 'Outfit', Arial, sans-serif;
+    }
+    .table {
+        table-layout: fixed; /* Fix table layout to enable column width control */
+        display: block;
+        gap: 25px;
+    }
+    .table td, .table th {
+        overflow: hidden; /* Hide overflow to prevent text wrapping */
+        text-overflow: ellipsis; /* Display ellipsis (...) for overflow text */
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+    .action-column {
+        width: 200px; /* Adjust the width of action column */
+    }
+    body{
+        font-family: 'Outfit', Arial, sans-serif;
+    }
+    .btn-group {
+        display: flex; /* Use flexbox for button group */
+        justify-content: center; /* Center align buttons horizontally */
+    }
+    .btn-group .btn {
+        margin: 2px; /* Add margin to buttons */
+        gap: 20px;
+    }
+    .container a {
+        margin-bottom: 20px;
+    }
+    /* New styles to ensure footer is properly positioned */
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .container {
+        flex: 1;
+    }
+    footer {
+        background-color: #f8f9fa;
+        padding: 10px 0;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="container">
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mt-5">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="card mt-5 small-width">
+            <div class="card-header">
+                <h1>Add Insurance</h1>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_insurance') }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.coverage_type.label(class="form-control-label") }}
+                        {{ form.coverage_type(class="form-control") }}
+                        {% for error in form.coverage_type.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.Insurance_company.label(class="form-control-label") }}
+                        {{ form.Insurance_company(class="form-control") }}
+                        {% for error in form.Insurance_company.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.premium_amount.label(class="form-control-label") }}
+                        {{ form.premium_amount(class="form-control") }}
+                        {% for error in form.premium_amount.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Insurance</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
