@@ -15,7 +15,7 @@ from app.forms import (
     RegistrationForm,
     LoginForm,
 )
-from app.utils import login_required, send_login_notification
+from app.decorator.decorator import login_required, send_login_notification
 
 
 auth_bp = Blueprint("auth", __name__)
@@ -40,7 +40,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         flash("User registered successfully!", "success")
-        return redirect(url_for("register"))
+        return redirect(url_for("auth.register"))
     return render_template("register.html", form=form)
 
 
@@ -61,9 +61,9 @@ def login():
             send_login_notification(user.email)
 
             if user.UserRole.lower() == "admin":
-                return redirect(url_for("dashboards"))
+                return redirect(url_for("main.dashboards"))
             elif user.UserRole.lower() == "user":
-                return redirect(url_for("display_cars"))
+                return redirect(url_for("car.display_cars"))
             else:
                 flash("User role is not recognized.", "danger")
         else:
@@ -78,4 +78,4 @@ def logout():
     if session.get("was_once_logged_in"):
         del session["was_once_logged_in"]
     flash("You have successfully logged yourself out.", "success")
-    return redirect(url_for("login"))
+    return redirect(url_for("auth.login"))

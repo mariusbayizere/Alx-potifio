@@ -1,107 +1,109 @@
-{% extends 'headerFooter.html' %}
-
-{% block title %}Cars{% endblock %}
-
-{% block content %}
-<!doctype html>
+{% extends 'headerFooter.html' %} {% block title %}Cars{% endblock %} {% block
+content %}
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Add Employee</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-        .container .form-group {
-            max-width: 600px;
-        }
-        .card {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            padding: 20px;
-        }
-        .container {
-            margin-top: 50px;
-            margin-bottom: 40px;
-        }
-        body{
-            font-family: 'Outfit', Arial, sans-serif;
-        }
+      .container .form-group {
+        max-width: 600px;
+      }
+      .card {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+      .container {
+        margin-top: 50px;
+        margin-bottom: 40px;
+      }
+      body {
+        font-family: 'Outfit', Arial, sans-serif;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <!-- Flash messages -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="mt-5">
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="mt-5">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
 
-        <div class="card small-width">
-            <div class="card-header">
-                <h1>Add Employee</h1>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ url_for('add_employee') }}">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.employee_ID.label(class="form-control-label") }}
-                        {{ form.employee_ID(class="form-control") }}
-                        {% for error in form.employee_ID.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.First_name.label(class="form-control-label") }}
-                        {{ form.First_name(class="form-control") }}
-                        {% for error in form.First_name.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.Last_name.label(class="form-control-label") }}
-                        {{ form.Last_name(class="form-control") }}
-                        {% for error in form.Last_name.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-
-                    <div class="form-group">
-                        {{ form.TelephoneNumber.label(class="form-control-label") }}
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                {{ form.country_code(class="form-control") }}
-                            </div>
-                            {{ form.TelephoneNumber(class="form-control") }}
-                        </div>
-                        {% for error in form.TelephoneNumber.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.position.label(class="form-control-label") }}
-                        {{ form.position(class="form-control") }}
-                        {% for error in form.position.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.location_id.label(class="form-control-label") }}
-                        {{ form.location_id(class="form-control") }}
-                        {% for error in form.location_id.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Employee</button>
-                </form>
-            </div>
+      <div class="card small-width">
+        <div class="card-header">
+          <h1>Add Employee</h1>
         </div>
+        <div class="card-body">
+          <form method="POST" action="{{ url_for('employee.add_employee') }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {{ form.employee_id.label(class="form-control-label") }} {{
+              form.employee_id(class="form-control") }} {% for error in
+              form.employee_id.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.First_name.label(class="form-control-label") }} {{
+              form.First_name(class="form-control") }} {% for error in
+              form.First_name.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.Last_name.label(class="form-control-label") }} {{
+              form.Last_name(class="form-control") }} {% for error in
+              form.Last_name.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              {{ form.TelephoneNumber.label(class="form-control-label") }}
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  {{ form.country_code(class="form-control") }}
+                </div>
+                {{ form.TelephoneNumber(class="form-control") }}
+              </div>
+              {% for error in form.TelephoneNumber.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.position.label(class="form-control-label") }} {{
+              form.position(class="form-control") }} {% for error in
+              form.position.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.location_id.label(class="form-control-label") }} {{
+              form.location_id(class="form-control") }} {% for error in
+              form.location_id.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Add Employee</button>
+          </form>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
 {% endblock %}

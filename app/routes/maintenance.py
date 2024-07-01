@@ -23,14 +23,14 @@ def add_maintenance():
         new_maintenance = Maintenance(
             maintenance_type=form.maintenance_type.data,
             maintenance_date=form.maintenance_date.data,
-            car_ID=form.car_id.data,  # Ensure this matches the correct field in your form
+            car_id=form.car_id.data,  # Ensure this matches the correct field in your form
             maintenance_cost=form.maintenance_cost.data,
             employee_id=form.employee_id.data,  # Ensure this matches the correct field in your form
         )
         db.session.add(new_maintenance)
         db.session.commit()
         flash("Maintenance added successfully!", "success")
-        return redirect(url_for("display_maintenance"))
+        return redirect(url_for("maintenance.display_maintenance"))
     return render_template("add_maintenance.html", form=form)
 
 
@@ -46,13 +46,13 @@ def update_maintenance(maintenance_id):
     if form.validate_on_submit():
         maintenance.maintenance_type = form.maintenance_type.data
         maintenance.maintenance_date = form.maintenance_date.data
-        maintenance.car_ID = form.car_id.data
+        maintenance.car_id = form.car_id.data
         maintenance.maintenance_cost = form.maintenance_cost.data
         maintenance.employee_id = form.employee_id.data
 
         db.session.commit()
         flash("Maintenance updated successfully!", "success")
-        return redirect(url_for("display_maintenance"))
+        return redirect(url_for("maintenance.display_maintenance"))
 
     return render_template(
         "update_maintenance.html", form=form, maintenance_id=maintenance_id
@@ -66,4 +66,4 @@ def delete_maintenance(maintenance_id):
     db.session.delete(maintenance)
     db.session.commit()
     flash("Maintenance deleted successfully!", "success")
-    return redirect(url_for("display_maintenance"))
+    return redirect(url_for("maintenance.display_maintenance"))

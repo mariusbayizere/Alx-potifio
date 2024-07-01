@@ -1,88 +1,97 @@
-{% extends 'headerFooter.html' %}
-
-{% block title %}Cars{% endblock %}
-
-{% block content %}
-<!doctype html>
+{% extends 'headerFooter.html' %} {% block title %}Cars{% endblock %} {% block
+content %}
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Update Insurance</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
     .container .form-group {
-        width: 600px;
+      width: 600px;
     }
-    body{
-        font-family:'Outfit';
+    body {
+      font-family: 'Outfit';
     }
-    body{
-        font-family: 'Outfit', Arial, sans-serif;
+    body {
+      font-family: 'Outfit', Arial, sans-serif;
     }
     .btn-group {
-        display: flex; /* Use flexbox for button group */
-        justify-content: center; /* Center align buttons horizontally */
+      display: flex; /* Use flexbox for button group */
+      justify-content: center; /* Center align buttons horizontally */
     }
     .btn-group .btn {
-        margin: 2px; /* Add margin to buttons */
-        gap: 20px;
+      margin: 2px; /* Add margin to buttons */
+      gap: 20px;
     }
     .container a {
-        margin-bottom: 20px;
+      margin-bottom: 20px;
     }
     /* New styles to ensure footer is properly positioned */
-    html, body {
-        height: 100%;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
     }
     .container {
-        flex: 1;
+      flex: 1;
     }
     footer {
-        background-color: #f8f9fa;
-        padding: 10px 0;
-        text-align: center;
+      background-color: #f8f9fa;
+      padding: 10px 0;
+      text-align: center;
     }
-</style>
-<body>
+  </style>
+  <body>
     <div class="container">
-        <div class="card mt-5">
-            <div class="card-header">
-                <h2>Update Insurance</h2>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ url_for('update_insurance', insurance_id=insurance_id) }}">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.coverage_type.label(class="form-control-label") }}
-                        {{ form.coverage_type(class="form-control") }}
-                        {% for error in form.coverage_type.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.Insurance_company.label(class="form-control-label") }}
-                        {{ form.Insurance_company(class="form-control") }}
-                        {% for error in form.Insurance_company.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.premium_amount.label(class="form-control-label") }}
-                        {{ form.premium_amount(class="form-control") }}
-                        {% for error in form.premium_amount.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update Insurance</button>
-                </form>
-            </div>
+      <div class="card mt-5">
+        <div class="card-header">
+          <h2>Update Insurance</h2>
         </div>
+        <div class="card-body">
+          <form
+            method="POST"
+            action="{{ url_for('insurance.update_insurance', insurance_id=insurance_id) }}"
+          >
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {{ form.coverage_type.label(class="form-control-label") }} {{
+              form.coverage_type(class="form-control") }} {% for error in
+              form.coverage_type.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.Insurance_company.label(class="form-control-label") }} {{
+              form.Insurance_company(class="form-control") }} {% for error in
+              form.Insurance_company.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.premium_amount.label(class="form-control-label") }} {{
+              form.premium_amount(class="form-control") }} {% for error in
+              form.premium_amount.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Update Insurance
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
 {%endblock%}

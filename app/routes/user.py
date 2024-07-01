@@ -8,7 +8,7 @@ from app.forms import UpdatePasswordForm
 user_bp = Blueprint("user", __name__)
 
 
-@user_bp.route("/update_user/<string:email>", methods=["GET", "POST"])
+@user_bp.route("/user.update_user/<string:email>", methods=["GET", "POST"])
 @login_required
 def update_user(email):
     """
@@ -31,6 +31,6 @@ def update_user(email):
 
         db.session.commit()
         flash("Password Are updated successfully!", "success")
-        return redirect(url_for("login"))
+        return redirect(url_for("auth.login"))
 
-    return render_template("update_user.html", form=form, email=email)
+    return render_template("user.update_user.html", form=form, email=email)

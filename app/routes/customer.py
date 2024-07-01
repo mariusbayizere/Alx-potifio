@@ -26,7 +26,7 @@ def add_customer():
         db.session.commit()
 
         flash("Customer added successfully!", "success")
-        return redirect(url_for("add_customer"))
+        return redirect(url_for("customer.add_customer"))
 
     return render_template("add_customer.html", customer_form=customer_form)
 
@@ -49,7 +49,7 @@ def update_customer(customer_id):
         db.session.commit()
 
         flash("Customer updated successfully!", "success")
-        return redirect(url_for("display_customers"))
+        return redirect(url_for("customer.display_customers"))
 
     return render_template(
         "update_customer.html", customer_form=customer_form, customer_id=customer_id
@@ -62,7 +62,7 @@ def delete_customer(customer_id):
     db.session.delete(customer)
     db.session.commit()
     flash("Customer record deleted successfully!", "success")
-    return redirect(url_for("display_customers"))
+    return redirect(url_for("customer.display_customers"))
 
 
 @customer_bp.route("/customers")

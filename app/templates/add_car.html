@@ -1,122 +1,122 @@
-{% extends 'headerFooter.html' %}
-
-{% block title %}Cars{% endblock %}
-
-{% block content %}
-<!doctype html>
+{% extends 'headerFooter.html' %} {% block title %}Cars{% endblock %} {% block
+content %}
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Add Car</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-
-</head>
-<style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
     .container .form-group {
-        width: 600px;
+      width: 600px;
     }
     .card {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        padding: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 20px;
     }
     .container {
-        margin-bottom: 40px;
+      margin-bottom: 40px;
     }
-    body{
-        font-family: 'Outfit', Arial, sans-serif;
+    body {
+      font-family: 'Outfit', Arial, sans-serif;
     }
-</style>
-<body>
+  </style>
+  <body>
     <div class="container">
-        <!-- Flash messages -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="mt-5">
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="mt-5">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
 
-        <div class="card mt-5 small-width">
-
-            <div class="card-header">
-                <h1>Add Car</h1>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ url_for('add_car') }}">
-                    {{ car_form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ car_form.car_ID.label(class="form-control-label") }}
-                        {{ car_form.car_ID(class="form-control") }}
-                        {% for error in car_form.car_ID.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ car_form.make.label(class="form-control-label") }}
-                        {{ car_form.make(class="form-control") }}
-                        {% for error in car_form.make.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ car_form.model.label(class="form-control-label") }}
-                        {{ car_form.model(class="form-control") }}
-                        {% for error in car_form.model.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ car_form.years.label(class="form-control-label") }}
-                        {{ car_form.years(class="form-control") }}
-                        {% for error in car_form.years.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ car_form.color.label(class="form-control-label") }}
-                        {{ car_form.color(class="form-control") }}
-                        {% for error in car_form.color.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ car_form.image.label(class="form-control-label") }}
-                        {{ car_form.image(class="form-control") }}
-                        {% for error in car_form.image.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ car_form.mileage.label(class="form-control-label") }}
-                        {{ car_form.mileage(class="form-control") }}
-                        {% for error in car_form.mileage.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ car_form.rental_price_per_day.label(class="form-control-label") }}
-                        {{ car_form.rental_price_per_day(class="form-control") }}
-                        {% for error in car_form.rental_price_per_day.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ car_form.insurance_id.label(class="form-control-label") }}
-                        {{ car_form.insurance_id(class="form-control") }}
-                        {% for error in car_form.insurance_id.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Car</button>
-                </form>
-            </div>
+      <div class="card mt-5 small-width">
+        <div class="card-header">
+          <h1>Add Car</h1>
         </div>
+        <div class="card-body">
+          <form method="POST" action="{{ url_for('car.add_car') }}">
+            {{ car_form.hidden_tag() }}
+            <div class="form-group">
+              {{ car_form.car_id.label(class="form-control-label") }} {{
+              car_form.car_id(class="form-control") }} {% for error in
+              car_form.car_id.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ car_form.make.label(class="form-control-label") }} {{
+              car_form.make(class="form-control") }} {% for error in
+              car_form.make.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ car_form.model.label(class="form-control-label") }} {{
+              car_form.model(class="form-control") }} {% for error in
+              car_form.model.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ car_form.years.label(class="form-control-label") }} {{
+              car_form.years(class="form-control") }} {% for error in
+              car_form.years.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ car_form.color.label(class="form-control-label") }} {{
+              car_form.color(class="form-control") }} {% for error in
+              car_form.color.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ car_form.image.label(class="form-control-label") }} {{
+              car_form.image(class="form-control") }} {% for error in
+              car_form.image.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ car_form.mileage.label(class="form-control-label") }} {{
+              car_form.mileage(class="form-control") }} {% for error in
+              car_form.mileage.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ car_form.rental_price_per_day.label(class="form-control-label")
+              }} {{ car_form.rental_price_per_day(class="form-control") }} {%
+              for error in car_form.rental_price_per_day.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ car_form.insurance_id.label(class="form-control-label") }} {{
+              car_form.insurance_id(class="form-control") }} {% for error in
+              car_form.insurance_id.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Add Car</button>
+          </form>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
 {% endblock%}

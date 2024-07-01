@@ -5,7 +5,7 @@ from .db import db
 class Car(db.Model):
     __tablename__ = "car"
 
-    car_ID = db.Column(db.String(10), primary_key=True, nullable=False)
+    car_id = db.Column(db.String(10), primary_key=True, nullable=False)
     make = db.Column(
         db.Enum(
             "TOYOTA", "MERCEDES", "HONDA", "FORD", "VOLKSWAGEN", "BMW", name="industry"
@@ -21,7 +21,7 @@ class Car(db.Model):
     mileage = db.Column(db.Integer, nullable=False)
     rental_price_per_day = db.Column(db.Integer, nullable=False)
     car_status = db.Column(db.String(100), nullable=False, default="Available")
-    insurance_id = db.Column(db.Integer, db.ForeignKey("insurance.insurance_ID"))
+    insurance_id = db.Column(db.Integer, db.ForeignKey("insurance.insurance_id"))
 
     maintenance = relationship(
         "Maintenance", back_populates="car", cascade="all, delete-orphan", uselist=False
@@ -33,7 +33,7 @@ class Car(db.Model):
 
     def __init__(
         self,
-        car_ID,
+        car_id,
         make,
         model,
         years,
@@ -43,7 +43,7 @@ class Car(db.Model):
         rental_price_per_day,
         insurance_id,
     ):
-        self.car_ID = car_ID
+        self.car_id = car_id
         self.make = make
         self.model = model
         self.years = years
@@ -55,4 +55,4 @@ class Car(db.Model):
         self.insurance_id = insurance_id
 
     def __repr__(self):
-        return f"<Car {self.car_ID} - {self.make} {self.model}>"
+        return f"<Car {self.car_id} - {self.make} {self.model}>"

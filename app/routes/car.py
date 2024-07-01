@@ -16,7 +16,7 @@ def add_car():
 
     if car_form.validate_on_submit():
         new_car = Car(
-            car_ID=car_form.car_ID.data,
+            car_id=car_form.car_id.data,
             make=car_form.make.data,
             model=car_form.model.data,
             years=car_form.years.data,
@@ -30,7 +30,7 @@ def add_car():
         db.session.commit()
 
         flash("Car added successfully!", "success")
-        return redirect(url_for("add_car"))
+        return redirect(url_for("car.add_car"))
 
     return render_template("add_car.html", car_form=car_form)
 
@@ -102,7 +102,7 @@ def update_car(car_id):
     car_form = CarForm(obj=car)
 
     if request.method == "POST" and car_form.validate_on_submit():
-        car.car_ID = car_form.car_ID.data
+        car.car_id = car_form.car_id.data
         car.make = car_form.make.data
         car.model = car_form.model.data
         car.years = car_form.years.data
@@ -115,7 +115,7 @@ def update_car(car_id):
         db.session.commit()
 
         flash("Car updated successfully!", "success")
-        return redirect(url_for("update_car", car_id=car_id))
+        return redirect(url_for("car.update_car", car_id=car_id))
 
     return render_template("update_car.html", car_form=car_form, car_id=car_id)
 
@@ -142,7 +142,7 @@ def delete_car(car_id):
     db.session.delete(car)
     db.session.commit()
     flash("Car record deleted successfully!", "success")
-    return redirect(url_for("display_cars"))
+    return redirect(url_for("car.display_cars"))
 
 
 @car_bp.route("/car_all")

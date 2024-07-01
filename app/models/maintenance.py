@@ -11,10 +11,10 @@ class Maintenance(db.Model):
     )
     maintenance_type = db.Column(db.String(200), nullable=False)
     maintenance_date = db.Column(db.Date, nullable=False)
-    car_id = db.Column(db.String(10), db.ForeignKey("car.car_ID"), nullable=False)
+    car_id = db.Column(db.String(10), db.ForeignKey("car.car_id"), nullable=False)
     maintenance_cost = db.Column(db.Integer, nullable=False)
     employee_id = db.Column(
-        db.String(10), db.ForeignKey("employee.employee_ID"), nullable=False
+        db.String(10), db.ForeignKey("employee.employee_id"), nullable=False
     )
 
     car = relationship("Car", back_populates="maintenance")

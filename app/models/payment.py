@@ -14,7 +14,7 @@ class Payment(db.Model):
         db.Enum("CASH", "CREDIT", "DEBIT", "VISA", name="payment_method_enum"),
         nullable=False,
     )
-    rental_id = db.Column(db.Integer, db.ForeignKey("rental.rental_ID"), nullable=False)
+    rental_id = db.Column(db.Integer, db.ForeignKey("rental.rental_id"), nullable=False)
     amount_paid = db.Column(db.Float, nullable=False)
     card_number = db.Column(db.String(16), nullable=True)
     cvv = db.Column(db.String(3), nullable=True)

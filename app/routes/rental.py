@@ -14,8 +14,8 @@ def add_rental():
     employees = Employee.query.all()
     cars = Car.query.all()
 
-    form.employee_ID.choices = [
-        (emp.employee_ID, f"{emp.First_name} {emp.Last_name}") for emp in employees
+    form.employee_id.choices = [
+        (emp.employee_id, f"{emp.First_name} {emp.Last_name}") for emp in employees
     ]
 
     total_rental_cost = 0
@@ -24,27 +24,27 @@ def add_rental():
         if form.validate_on_submit():
             rental_start_date = form.rental_start_date.data
             return_date = form.return_date.data
-            car_ID = form.car_ID.data
+            car_id = form.car_id.data
 
             rental_duration = (return_date - rental_start_date).days
 
-            car = Car.query.filter_by(car_ID=car_ID).first()
+            car = Car.query.filter_by(car_id=car_id).first()
             if not car:
                 flash("Car not found!", "danger")
-                return redirect(url_for("add_rental"))
+                return redirect(url_for("rental.add_rental"))
 
             employee = Employee.query.filter_by(
-                employee_ID=form.employee_ID.data
+                employee_id=form.employee_id.data
             ).first()
             if not employee:
                 flash("Employee not found!", "danger")
-                return redirect(url_for("add_rental"))
+                return redirect(url_for("rental.add_rental"))
 
             print(f"Employee Position: {employee.position}")
 
             if employee.position.upper() != "MANAGER":
                 flash("Only managers are authorized to give out cars!", "danger")
-                return redirect(url_for("add_rental"))
+                return redirect(url_for("rental.add_rental"))
 
             total_rental_cost = rental_duration * car.rental_price_per_day
 
@@ -53,14 +53,14 @@ def add_rental():
                 return_date=return_date,
                 total_rental_cost=total_rental_cost,
                 payment_status=form.payment_status.data,
-                employee_ID=form.employee_ID.data,
-                car_ID=form.car_ID.data,
+                employee_id=form.employee_id.data,
+                car_id=form.car_id.data,
                 customer_id=form.customer_id.data,
             )
             db.session.add(new_rental)
             db.session.commit()
             flash("Rental added successfully!", "success")
-            return redirect(url_for("add_payment"))
+            return redirect(url_for("rental.add_payment"))
         else:
             flash("Form validation failed. Please check your inputs.", "danger")
 
@@ -87,8 +87,8 @@ def update_rental(rental_id):
     rental = Rental.query.get_or_404(rental_id)
     form = RentalForm(obj=rental)
     employees = Employee.query.all()
-    form.employee_ID.choices = [
-        (e.employee_ID, f"{e.First_name} {e.Last_name} ({e.position})")
+    form.employee_id.choices = [
+        (e.employee_id, f"{e.First_name} {e.Last_name} ({e.position})")
         for e in employees
     ]
 
@@ -100,10 +100,10 @@ def update_rental(rental_id):
         rental_duration = (rental.return_date - rental.rental_start_date).days
 
         # Fetch car's rental price per day
-        car = Car.query.filter_by(car_ID=form.car_ID.data).first()
+        car = Car.query.filter_by(car_id=form.car_id.data).first()
         if not car:
             flash("Car not found!", "danger")
-            return redirect(url_for("update_rental", rental_id=rental_id))
+            return redirect(url_for("rental.update_rental", rental_id=rental_id))
 
         # Debugging info: Check rental dates and duration
         print(f"Rental Start Date: {rental.rental_start_date}")
@@ -111,20 +111,20 @@ def update_rental(rental_id):
         print(f"Rental Duration: {rental_duration} days")
 
         # Debugging info: Check car details
-        print(f"Car ID: {form.car_ID.data}")
+        print(f"Car ID: {form.car_id.data}")
         print(f"Car Rental Price per Day: {car.rental_price_per_day}")
 
         # Calculate total rental cost
         rental.total_rental_cost = rental_duration * car.rental_price_per_day
 
         rental.payment_status = form.payment_status.data
-        rental.employee_ID = form.employee_ID.data
+        rental.employee_id = form.employee_id.data
         rental.customer_id = form.customer_id.data
-        rental.car_ID = form.car_ID.data
+        rental.car_id = form.car_id.data
 
         db.session.commit()
         flash("Rental updated successfully!", "success")
-        return redirect(url_for("update_rental", rental_id=rental.rental_ID))
+        return redirect(url_for("rental.update_rental", rental_id=rental.rental_id))
 
     return render_template("rental_update.html", form=form, rental=rental)
 
@@ -132,7 +132,7 @@ def update_rental(rental_id):
 @rental_bp.route("/get_rental_cost/<int:rental_id>", methods=["GET"])
 @login_required
 def get_rental_cost(rental_id):
-    rental = Rental.query.filter_by(rental_ID=rental_id).first()
+    rental = Rental.query.filter_by(rental_id=rental_id).first()
     if rental:
         return jsonify(success=True, total_rental_cost=rental.total_rental_cost)
     else:
@@ -158,5 +158,5 @@ def delete_rental(rental_id):
         flash("Rental record not found!", "danger")
 
     return redirect(
-        url_for("rental_table")
+        url_for("rental.rental_table")
     )  # Adjust the redirection as per your application's flow

@@ -1,67 +1,74 @@
-{% extends 'headerFooter.html' %}
-
-{% block title %}Cars{% endblock %}
-
-{% block content %}
-<!doctype html>
+{% extends 'headerFooter.html' %} {% block title %}Cars{% endblock %} {% block
+content %}
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Update Location</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-
-</head>
-<style>
-    body{
-        font-family: 'Outfit', Arial, sans-serif;
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      font-family: 'Outfit', Arial, sans-serif;
     }
     .container .form-group {
-        width: 600px;
+      width: 600px;
     }
-</style>
-<body>
+  </style>
+  <body>
     <div class="container">
-        <div class="card mt-5">
-            <div class="card-header">
-                <h2>Update Location</h2>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ url_for('update_location', location_id=location_id) }}">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.location_ID.label(class="form-control-label") }}
-                        {{ form.location_ID(class="form-control", readonly="readonly") }}
-                        {% for error in form.location_ID.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.address.label(class="form-control-label") }}
-                        {{ form.address(class="form-control") }}
-                        {% for error in form.address.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.contact_information.label(class="form-control-label") }}
-                        {{ form.contact_information(class="form-control") }}
-                        {% for error in form.contact_information.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.operating_hours.label(class="form-control-label") }}
-                        {{ form.operating_hours(class="form-control") }}
-                        {% for error in form.operating_hours.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update Location</button>
-                </form>
-            </div>
+      <div class="card mt-5">
+        <div class="card-header">
+          <h2>Update Location</h2>
         </div>
+        <div class="card-body">
+          <form
+            method="POST"
+            action="{{ url_for('location.update_location', location_id=location_id) }}"
+          >
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {{ form.location_ID.label(class="form-control-label") }} {{
+              form.location_ID(class="form-control", readonly="readonly") }} {%
+              for error in form.location_ID.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.address.label(class="form-control-label") }} {{
+              form.address(class="form-control") }} {% for error in
+              form.address.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.contact_information.label(class="form-control-label") }}
+              {{ form.contact_information(class="form-control") }} {% for error
+              in form.contact_information.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.operating_hours.label(class="form-control-label") }} {{
+              form.operating_hours(class="form-control") }} {% for error in
+              form.operating_hours.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Update Location
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
 {% endblock %}

@@ -1,5 +1,3 @@
-from flask import Flask, render_template, redirect, url_for, flash, session, request
-from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from datetime import datetime
 from wtforms.validators import DataRequired, Email
@@ -28,8 +26,6 @@ from app.models.employee import Employee
 from app.models.rental import Rental
 from flask_wtf import FlaskForm
 from app.models.car import Car
-from flask_mail import Mail, Message
-from functools import wraps
 from datetime import datetime
 import datetime
 
@@ -102,7 +98,7 @@ class UpdatePasswordForm(FlaskForm):
 
 
 class CarForm(FlaskForm):
-    car_ID = StringField("Car ID", validators=[DataRequired()])
+    car_id = StringField("Car ID", validators=[DataRequired()])
     make = SelectField(
         "Make",
         choices=[
@@ -177,7 +173,7 @@ class LocationForm(FlaskForm):
 
 
 class EmployeeForm(FlaskForm):
-    employee_ID = StringField(
+    employee_id = StringField(
         "Employee ID", validators=[InputRequired(), Length(max=10)]
     )
     First_name = StringField(
@@ -209,7 +205,7 @@ class EmployeeForm(FlaskForm):
     )
 
     def validate_employee_ID(self, field):
-        if Employee.query.filter_by(employee_ID=field.data).first():
+        if Employee.query.filter_by(employee_id=field.data).first():
             raise ValidationError(
                 "Employee ID already exists. Please use a different ID."
             )
@@ -219,7 +215,7 @@ class EmployeeForm(FlaskForm):
 
 
 class RentalForm(FlaskForm):
-    rental_ID = HiddenField("ID")
+    rental_id = HiddenField("ID")
     rental_start_date = DateField(
         "Rental Start Date", format="%Y-%m-%d", validators=[DataRequired()]
     )
@@ -232,8 +228,8 @@ class RentalForm(FlaskForm):
     payment_status = StringField(
         "Payment Status", validators=[DataRequired(), Length(max=255)]
     )
-    employee_ID = SelectField("Employee ID", validators=[DataRequired()])
-    car_ID = StringField("Car ID", validators=[DataRequired(), Length(max=10)])
+    employee_id = SelectField("Employee ID", validators=[DataRequired()])
+    car_id = StringField("Car ID", validators=[DataRequired(), Length(max=10)])
     customer_id = StringField(
         "Customer ID", validators=[DataRequired(), Length(max=10)]
     )
@@ -248,11 +244,11 @@ class RentalForm(FlaskForm):
 
     def validate_car_ID(self, field):
         existing_rental = Rental.query.filter(
-            Rental.car_ID == field.data,
+            Rental.car_id == field.data,
             Rental.rental_start_date <= self.return_date.data,
             Rental.return_date >= self.rental_start_date.data,
         ).first()
-        if existing_rental and existing_rental.rental_ID != self.rental_ID.data:
+        if existing_rental and existing_rental.rental_id != self.rental_id.data:
             raise ValidationError("This car is already rented for the selected dates.")
 
 
@@ -320,8 +316,8 @@ class MaintenanceForm(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(MaintenanceForm, self).__init__(*args, **kwargs)
-        self.car_id.choices = [(car.car_ID, car.car_ID) for car in Car.query.all()]
+        self.car_id.choices = [(car.car_id, car.car_id) for car in Car.query.all()]
         self.employee_id.choices = [
-            (employee.employee_ID, employee.employee_ID)
+            (employee.employee_id, employee.employee_id)
             for employee in Employee.query.all()
         ]

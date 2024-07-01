@@ -45,6 +45,7 @@ def create_app():
         return User.query.get(int(user_id))
 
     with app.app_context():
+        db.drop_all()
         db.create_all()
 
         from app.routes.auth import auth_bp
@@ -58,7 +59,7 @@ def create_app():
         from app.routes.maintenance import maintenance_bp
         from app.routes.payment import payment_bp
         from app.routes.rental import rental_bp
-        from app.routes.user import user
+        from app.routes.user import user_bp
 
         app.register_blueprint(main_bp)
         app.register_blueprint(auth_bp, url_prefix="/auth")
@@ -71,6 +72,6 @@ def create_app():
         app.register_blueprint(maintenance_bp, url_prefix="/maintenance")
         app.register_blueprint(payment_bp, url_prefix="/payment")
         app.register_blueprint(rental_bp, url_prefix="/rental")
-        app.register_blueprint(user, url_prefix="/user")
+        app.register_blueprint(user_bp, url_prefix="/user")
 
     return app

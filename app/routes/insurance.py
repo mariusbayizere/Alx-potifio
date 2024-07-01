@@ -26,7 +26,7 @@ def add_insurance():
         db.session.add(new_insurance)
         db.session.commit()
         flash("Insurance added successfully!", "success")
-        return redirect(url_for("add_insurance"))
+        return redirect(url_for("insurance.add_insurance"))
     return render_template("add_insurance.html", form=form)
 
 
@@ -44,7 +44,7 @@ def update_insurance(insurance_id):
 
         db.session.commit()
         flash("Insurance updated successfully!", "success")
-        return redirect(url_for("display_insurances"))
+        return redirect(url_for("insurance.display_insurances"))
 
     return render_template(
         "update_insurance.html", form=form, insurance_id=insurance_id
@@ -58,7 +58,7 @@ def delete_insurance(insurance_id):
     db.session.delete(insurance)
     db.session.commit()
     flash("Insurance deleted successfully!", "success")
-    return redirect(url_for("display_insurances"))
+    return redirect(url_for("insurance.display_insurances"))
 
 
 @insurance_bp.route("/insurances")

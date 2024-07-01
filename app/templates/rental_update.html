@@ -1,113 +1,123 @@
-{% extends 'headerFooter.html' %}
-
-{% block title %}Cars{% endblock %}
-
-{% block content %}
-<!doctype html>
+{% extends 'headerFooter.html' %} {% block title %}Cars{% endblock %} {% block
+content %}
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Update Rental</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-
-</head>
-<style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
     .container .form-group {
-        width: 600px;
+      width: 600px;
     }
     .card {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        padding: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 20px;
     }
-    .form-group button{
-        display : flex;
-        gap: 500px;
+    .form-group button {
+      display: flex;
+      gap: 500px;
     }
     .container {
-        margin-bottom: 40px;
+      margin-bottom: 40px;
     }
-    body{
-        font-family: 'Outfit';
+    body {
+      font-family: 'Outfit';
     }
-</style>
-<body>
+  </style>
+  <body>
     <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="mt-5">
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">{{ message }}</div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %}
+      <div class="mt-5">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+      {% endif %} {% endwith %}
 
-        <div class="card small-width">
-            <div class="card-header">
-                <h1>Update Rental</h1>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ url_for('update_rental', rental_id=rental.rental_ID) }}">
-                    {{ form.hidden_tag() }}
-                    {{ form.id }}
-                    <div class="form-group">
-                        {{ form.rental_start_date.label(class="form-control-label") }}
-                        {{ form.rental_start_date(class="form-control") }}
-                        {% for error in form.rental_start_date.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.return_date.label(class="form-control-label") }}
-                        {{ form.return_date(class="form-control") }}
-                        {% for error in form.return_date.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.total_rental_cost.label(class="form-control-label") }}
-                        {{ form.total_rental_cost(class="form-control") }}
-                        {% for error in form.total_rental_cost.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.payment_status.label(class="form-control-label") }}
-                        {{ form.payment_status(class="form-control") }}
-                        {% for error in form.payment_status.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.employee_ID.label(class="form-control-label") }}
-                        {{ form.employee_ID(class="form-control") }}
-                        {% for error in form.employee_ID.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.car_ID.label(class="form-control-label") }}
-                        {{ form.car_ID(class="form-control") }}
-                        {% for error in form.car_ID.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.customer_id.label(class="form-control-label") }}
-                        {{ form.customer_id(class="form-control") }}
-                        {% for error in form.customer_id.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <button type="Cancel" class="btn btn-primary mb-2 ml-2">Cancel</button>
-                    <button type="submit" class="btn btn-primary mb-2">Update Rental</button>
-                </form>
-            </div>
+      <div class="card small-width">
+        <div class="card-header">
+          <h1>Update Rental</h1>
         </div>
+        <div class="card-body">
+          <form
+            method="POST"
+            action="{{ url_for('rental.update_rental', rental_id=rental.rental_id) }}"
+          >
+            {{ form.hidden_tag() }} {{ form.id }}
+            <div class="form-group">
+              {{ form.rental_start_date.label(class="form-control-label") }} {{
+              form.rental_start_date(class="form-control") }} {% for error in
+              form.rental_start_date.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.return_date.label(class="form-control-label") }} {{
+              form.return_date(class="form-control") }} {% for error in
+              form.return_date.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.total_rental_cost.label(class="form-control-label") }} {{
+              form.total_rental_cost(class="form-control") }} {% for error in
+              form.total_rental_cost.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.payment_status.label(class="form-control-label") }} {{
+              form.payment_status(class="form-control") }} {% for error in
+              form.payment_status.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.employee_id.label(class="form-control-label") }} {{
+              form.employee_id(class="form-control") }} {% for error in
+              form.employee_id.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.car_id.label(class="form-control-label") }} {{
+              form.car_id(class="form-control") }} {% for error in
+              form.car_id.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.customer_id.label(class="form-control-label") }} {{
+              form.customer_id(class="form-control") }} {% for error in
+              form.customer_id.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <button type="Cancel" class="btn btn-primary mb-2 ml-2">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary mb-2">
+              Update Rental
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
 {%endblock%}

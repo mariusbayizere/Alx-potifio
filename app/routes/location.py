@@ -30,7 +30,7 @@ def add_location():
             db.session.add(new_location)
             db.session.commit()
             flash("Location added successfully!", "success")
-            return redirect(url_for("add_location"))
+            return redirect(url_for("location.add_location"))
 
     return render_template("add_location.html", form=form)
 
@@ -49,7 +49,7 @@ def update_location(location_id):
 
         db.session.commit()
         flash("Location updated successfully!", "success")
-        return redirect(url_for("display_locations"))
+        return redirect(url_for("location.display_locations"))
 
     return render_template("update_location.html", form=form, location_id=location_id)
 
@@ -67,4 +67,4 @@ def delete_location(location_id):
     db.session.delete(location)
     db.session.commit()
     flash("Location deleted successfully!", "success")
-    return redirect(url_for("display_locations"))
+    return redirect(url_for("location.display_locations"))

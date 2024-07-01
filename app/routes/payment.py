@@ -15,11 +15,11 @@ def add_payment():
     if request.method == "POST":
         if form.validate_on_submit():
             rental_id = form.rental_id.data
-            rental = Rental.query.filter_by(rental_ID=rental_id).first()
+            rental = Rental.query.filter_by(rental_id=rental_id).first()
 
             if not rental:
                 flash("Rental not found!", "danger")
-                return redirect(url_for("add_payment"))
+                return redirect(url_for("payment.add_payment"))
 
             payment_date = form.payment_date.data
             payment_method = form.payment_method.data
@@ -47,7 +47,7 @@ def add_payment():
             db.session.add(new_payment)
 
             # Update car status
-            car = Car.query.filter_by(car_ID=rental.car_ID).first()
+            car = Car.query.filter_by(car_id=rental.car_id).first()
             if car:
                 car.car_status = "Borrowed"
 
@@ -56,7 +56,7 @@ def add_payment():
 
             db.session.commit()
             flash("Payment added successfully!", "success")
-            return redirect(url_for("add_payment"))
+            return redirect(url_for("payment.add_payment"))
         else:
             flash("Form validation failed. Please check your inputs.", "danger")
     return render_template("add_payment.html", form=form)
@@ -85,7 +85,7 @@ def update_payment(payment_id):
 
         db.session.commit()
         flash("Payment updated successfully!", "success")
-        return redirect(url_for("display_payments"))
+        return redirect(url_for("payment.display_payments"))
 
     return render_template("update_payment.html", form=form, payment_id=payment_id)
 
@@ -96,7 +96,7 @@ def delete_payment(payment_id):
     db.session.delete(payment)
     db.session.commit()
     flash("Payment deleted successfully!", "success")
-    return redirect(url_for("display_payments"))
+    return redirect(url_for("payment.display_payments"))
 
 
 @payment_bp.route("/payments")

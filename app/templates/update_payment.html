@@ -1,94 +1,102 @@
-{% extends 'headerFooter.html' %}
-
-{% block title %}Cars{% endblock %}
-
-{% block content %}
-<!doctype html>
+{% extends 'headerFooter.html' %} {% block title %}Cars{% endblock %} {% block
+content %}
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Update Payment</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<style>
-    body{
-        font-family: 'Outfit', Arial, sans-serif;
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      font-family: 'Outfit', Arial, sans-serif;
     }
     .payment-logo {
-        display: none;
-        width: 40px;
-        padding-top: 15px;
-        border-radius:5px;
-        margin-left: 10px;
+      display: none;
+      width: 40px;
+      padding-top: 15px;
+      border-radius: 5px;
+      margin-left: 10px;
     }
     .container .form-group {
-        width: 500px;
+      width: 500px;
     }
-</style>
-<body>
+  </style>
+  <body>
     <div class="container">
-        <div class="card mt-5">
-            <div class="card-header">
-                <h2>Update Payment</h2>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ url_for('update_payment', payment_id=payment_id) }}">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.payment_date.label(class="form-control-label") }}
-                        {{ form.payment_date(class="form-control") }}
-                        {% for error in form.payment_date.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.payment_method.label(class="form-control-label") }}
-                        {{ form.payment_method(class="form-control") }}
-                        {% for error in form.payment_method.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.rental_id.label(class="form-control-label") }}
-                        {{ form.rental_id(class="form-control") }}
-                        {% for error in form.rental_id.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.amount_paid.label(class="form-control-label") }}
-                        {{ form.amount_paid(class="form-control", readonly=True) }}
-                        {% for error in form.amount_paid.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.card_number.label(class="form-control-label") }}
-                        {{ form.card_number(class="form-control") }}
-                        {% for error in form.card_number.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.cvv.label(class="form-control-label") }}
-                        {{ form.cvv(class="form-control") }}
-                        {% for error in form.cvv.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.expiry_date.label(class="form-control-label") }}
-                        {{ form.expiry_date(class="form-control") }}
-                        {% for error in form.expiry_date.errors %}
-                            <span class="text-danger">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update Payment</button>
-                </form>
-            </div>
+      <div class="card mt-5">
+        <div class="card-header">
+          <h2>Update Payment</h2>
         </div>
+        <div class="card-body">
+          <form
+            method="POST"
+            action="{{ url_for('payment.update_payment', payment_id=payment_id) }}"
+          >
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+              {{ form.payment_date.label(class="form-control-label") }} {{
+              form.payment_date(class="form-control") }} {% for error in
+              form.payment_date.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.payment_method.label(class="form-control-label") }} {{
+              form.payment_method(class="form-control") }} {% for error in
+              form.payment_method.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.rental_id.label(class="form-control-label") }} {{
+              form.rental_id(class="form-control") }} {% for error in
+              form.rental_id.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.amount_paid.label(class="form-control-label") }} {{
+              form.amount_paid(class="form-control", readonly=True) }} {% for
+              error in form.amount_paid.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.card_number.label(class="form-control-label") }} {{
+              form.card_number(class="form-control") }} {% for error in
+              form.card_number.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.cvv.label(class="form-control-label") }} {{
+              form.cvv(class="form-control") }} {% for error in form.cvv.errors
+              %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <div class="form-group">
+              {{ form.expiry_date.label(class="form-control-label") }} {{
+              form.expiry_date(class="form-control") }} {% for error in
+              form.expiry_date.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Update Payment
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
 {% endblock %}
