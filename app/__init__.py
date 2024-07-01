@@ -47,4 +47,30 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+        from app.routes.auth import auth_bp
+        from app.routes.car import car_bp
+        from app.routes.customer import customer_bp
+        from app.routes.employee import employee_bp
+        from app.routes.error import error_bp
+        from app.routes.insurance import insurance_bp
+        from app.routes.location import location_bp
+        from app.routes.main import main_bp
+        from app.routes.maintenance import maintenance_bp
+        from app.routes.payment import payment_bp
+        from app.routes.rental import rental_bp
+        from app.routes.user import user
+
+        app.register_blueprint(main_bp)
+        app.register_blueprint(auth_bp, url_prefix="/auth")
+        app.register_blueprint(car_bp, url_prefix="/car")
+        app.register_blueprint(customer_bp, url_prefix="/customer")
+        app.register_blueprint(employee_bp, url_prefix="/employee")
+        app.register_blueprint(error_bp, url_prefix="/error")
+        app.register_blueprint(insurance_bp, url_prefix="/insurance")
+        app.register_blueprint(location_bp, url_prefix="/location")
+        app.register_blueprint(maintenance_bp, url_prefix="/maintenance")
+        app.register_blueprint(payment_bp, url_prefix="/payment")
+        app.register_blueprint(rental_bp, url_prefix="/rental")
+        app.register_blueprint(user, url_prefix="/user")
+
     return app
