@@ -1,6 +1,5 @@
 from . import db
 from sqlalchemy.orm import relationship
-from sqlalchemy import Enum
 
 
 class Insurance(db.Model):

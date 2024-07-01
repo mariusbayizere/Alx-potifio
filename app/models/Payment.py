@@ -1,6 +1,6 @@
 from sqlalchemy.orm import relationship
 from datetime import date
-from .db
+from .db import db
 
 
 class Payment(db.Model):

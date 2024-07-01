@@ -1,7 +1,5 @@
-# model/employee.py
-from . import db
+from .db import db
 from sqlalchemy.orm import relationship
-from sqlalchemy import Enum
 
 
 class Employee(db.Model):
