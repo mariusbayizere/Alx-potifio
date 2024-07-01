@@ -15,3 +15,15 @@ def dashboards():
         will return the dashboard page if the request is success
     """
     return render_template("dashboard.html")
+
+
+@main_bp.route("/About")
+@login_required
+def About():
+    return render_template("about-us.html")
+
+
+@main_bp.route("/contact")
+@login_required
+def Contacts():
+    return render_template("contact.html")

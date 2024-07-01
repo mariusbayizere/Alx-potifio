@@ -23,11 +23,11 @@ from wtforms.validators import (
     ValidationError,
     InputRequired,
 )
-from models.Location import Location
-from models.Employee import Employee
-from models.Rental import Rental
+from app.models.location import Location
+from app.models.employee import Employee
+from app.models.rental import Rental
 from flask_wtf import FlaskForm
-from app.models.Car import Car
+from app.models.car import Car
 from flask_mail import Mail, Message
 from functools import wraps
 from datetime import datetime

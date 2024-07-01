@@ -7,3 +7,4 @@ from .location import Location
 from .payment import Payment
 from .maintenance import Maintenance
 from .db import db
+from .insurance import Insurance
