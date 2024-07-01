@@ -1,0 +1,30 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  margin-top: 2rem;
+}
+
+footer img {
+  margin: 0 10px;
+}
+.small-width {
+  max-width: 800px;
+}
+.container .alert {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.container .card {
+  width: 800px;
+}
+.container .form-group {
+  width: 500px;
+}
