@@ -1,5 +1,5 @@
-from . import db
 from sqlalchemy.orm import relationship
+from .db import db
 
 
 class Customer(db.Model):
