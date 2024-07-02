@@ -20,7 +20,7 @@ def add_insurance():
     if form.validate_on_submit():
         new_insurance = Insurance(
             coverage_type=form.coverage_type.data,
-            Insurance_company=form.Insurance_company.data,
+            insurance_company=form.Insurance_company.data,
             premium_amount=form.premium_amount.data,
         )
         db.session.add(new_insurance)
