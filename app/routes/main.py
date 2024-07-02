@@ -17,13 +17,13 @@ def dashboards():
     return render_template("dashboard.html")
 
 
-@main_bp.route("/About")
+@main_bp.route("/about")
 @login_required
-def About():
+def about():
     return render_template("about-us.html")
 
 
 @main_bp.route("/contact")
 @login_required
-def Contacts():
+def contacts():
     return render_template("contact.html")

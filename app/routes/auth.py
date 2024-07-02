@@ -32,8 +32,8 @@ def register():
             form.password.data.encode("utf-8"), bcrypt.gensalt()
         )
         new_user = User(
-            fullName=form.fullName.data,
-            UserRole=form.UserRole.data,
+            full_name=form.fullName.data,
+            user_role=form.UserRole.data,
             email=form.email.data,
             password=hashed_password.decode("utf-8"),
         )
@@ -63,7 +63,7 @@ def login():
             if user.UserRole.lower() == "admin":
                 return redirect(url_for("main.dashboards"))
             elif user.UserRole.lower() == "user":
-                return redirect(url_for("car.display_cars"))
+                return redirect(url_for("car_bp.display_cars"))
             else:
                 flash("User role is not recognized.", "danger")
         else:

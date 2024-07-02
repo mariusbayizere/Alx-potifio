@@ -142,7 +142,7 @@ def delete_car(car_id):
     db.session.delete(car)
     db.session.commit()
     flash("Car record deleted successfully!", "success")
-    return redirect(url_for("car.display_cars"))
+    return redirect(url_for("car_bp.display_cars"))
 
 
 @car_bp.route("/car_all")
