@@ -60,10 +60,10 @@ def login():
             flash("Login successful!", "success")
             send_login_notification(user.email)
 
-            if user.UserRole.lower() == "admin":
+            if user.user_role.lower() == "admin":
                 return redirect(url_for("main.dashboards"))
-            elif user.UserRole.lower() == "user":
-                return redirect(url_for("car_bp.display_cars"))
+            elif user.user_role.lower() == "user":
+                return redirect(url_for("car.display_cars"))
             else:
                 flash("User role is not recognized.", "danger")
         else:

@@ -5,7 +5,7 @@ from app.forms import PaymentForm
 from app.models import Payment, Rental, db, Car
 
 
-payment_bp = Blueprint("payment_bp", __name__)
+payment_bp = Blueprint("payment", __name__)
 
 
 @payment_bp.route("/add_payment", methods=["GET", "POST"])

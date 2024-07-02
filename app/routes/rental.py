@@ -4,7 +4,7 @@ from app.decorator.decorator import login_required
 from app.forms import RentalForm
 from app.models import Car, Employee, Rental, db
 
-rental_bp = Blueprint("rental_bp", __name__)
+rental_bp = Blueprint("rental", __name__)
 
 
 @rental_bp.route("/add_rental", methods=["GET", "POST"])

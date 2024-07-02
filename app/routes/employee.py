@@ -5,7 +5,7 @@ from app.forms import EmployeeForm
 from app.models import Employee, db
 
 
-employee_bp = Blueprint("employee_bp", __name__)
+employee_bp = Blueprint("employee", __name__)
 
 
 @employee_bp.route("/add_employee", methods=["GET", "POST"])

@@ -4,7 +4,7 @@ from app.decorator.decorator import login_required
 from app.forms import CustomerForm
 from app.models import Customer, db
 
-customer_bp = Blueprint("customer_bp", __name__)
+customer_bp = Blueprint("customer", __name__)
 
 
 @customer_bp.route("/add_customer", methods=["GET", "POST"])

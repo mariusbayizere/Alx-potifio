@@ -165,15 +165,15 @@ content %}
               switch (selectedMethod) {
                   case 'VISA':
                       showCardFields = true;
-                      logoSrc = '{{ url_for('static', filename='/visa.png') }}';
+                      logoSrc = '{{ url_for('static', filename='images/visa.png') }}';
                       break;
                   case 'CREDIT':
                       showCardFields = true;
-                      logoSrc = '{{ url_for('static', filename='/creditCard.png') }}';
+                      logoSrc = '{{ url_for('static', filename='images/creditCard.png') }}';
                       break;
                   case 'DEBIT':
                       showCardFields = true;
-                      logoSrc = '{{ url_for('static', filename='/debit.png') }}';
+                      logoSrc = '{{ url_for('static', filename='images/debit.png') }}';
                       break;
                   default:
                       showCardFields = false;

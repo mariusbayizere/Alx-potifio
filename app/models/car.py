@@ -51,7 +51,7 @@ class Car(db.Model):
         self.image = image
         self.mileage = mileage
         self.rental_price_per_day = rental_price_per_day
-        self.car_status = "Available"  # Default value
+        self.car_status = "Available"
         self.insurance_id = insurance_id
 
     def __repr__(self):

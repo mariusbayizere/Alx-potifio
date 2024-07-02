@@ -25,7 +25,7 @@
           alt="Facebook"
           style="width: 35px; border-radius: 20px"
       /></a>
-      <a class="navbar-brand" href="{{ url_for('car_bp.display_cars') }}"
+      <a class="navbar-brand" href="{{ url_for('car.display_cars') }}"
         >Car Rental</a
       >
       <button
@@ -42,20 +42,20 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('car_bp.display_cars') }}"
+            <a class="nav-link" href="{{ url_for('car.display_cars') }}"
               >Home</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('car_bp.display_cars') }}"
+            <a class="nav-link" href="{{ url_for('car.display_cars') }}"
               >Cars</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('maint.About') }}">About Us</a>
+            <a class="nav-link" href="{{ url_for('main.about') }}">About Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('main.Contacts') }}"
+            <a class="nav-link" href="{{ url_for('main.contacts') }}"
               >Contact Us</a
             >
           </li>
@@ -144,21 +144,21 @@
         <a
           href="https://www.google.com/search?q=facebook&sca_esv=3ccb936e91fffbe3&sca_upv=1&rlz=1C1KNTJ_enRW1077RW1079&sxsrf=ADLYWILDJ0JUeP_wN-m7r64bS5CdpTXaJg%3A1718993825219&ei=ocN1ZtGKDfb_i-gPlLGv2AI&oq=face&gs_lp=Egxnd3Mtd2l6LXNlcnAiBGZhY2UqAggAMhAQABiABBixAxhDGIMBGIoFMhAQABiABBixAxhDGIMBGIoFMgoQABiABBhDGIoFMgoQABiABBhDGIoFMg0QABiABBixAxhDGIoFMggQABiABBixAzIIEAAYgAQYsQMyCBAAGIAEGLEDMgUQABiABDIFEAAYgARIszpQhg5YqiJwAngAkAEBmAHQB6AB2iCqAQM2LTW4AQHIAQD4AQGYAgWgAqwTqAIUwgIKEAAYsAMY1gQYR8ICDRAAGIAEGLADGEMYigXCAhMQLhiABBiwAxjRAxhDGMcBGIoFwgIHECMYJxjqAsICExAAGIAEGEMYtAIYigUY6gLYAQHCAhkQLhiABBjRAxhDGLQCGMcBGIoFGOoC2AEBwgILEAAYgAQYsQMYgwHCAg4QABiABBixAxiDARiKBcICDhAuGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwGYAxWIBgGQBgq6BgYIARABGAGSBwcyLjUtMi4xoAegKA&sclient=gws-wiz-serp"
           ><img
-            src="{{ url_for('static', filename='facebook.png') }}"
+            src="{{ url_for('static', filename='images/facebook.png') }}"
             alt="Facebook"
             style="width: 30px; border-radius: 8px"
         /></a>
         <a
           href="https://www.google.com/search?q=twitter&rlz=1C1KNTJ_enRW1077RW1079&oq=&gs_lcrp=EgZjaHJvbWUqBggBEEUYOzIPCAAQRRg5GIMBGLEDGIAEMgYIARBFGDsyDQgCEAAYgwEYsQMYgAQyDQgDEAAYgwEYsQMYgAQyBwgEEAAYgAQyBwgFEAAYgAQyBggGEEUYPTIGCAcQRRg90gEINjc2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8"
           ><img
-            src="{{ url_for('static', filename='tweeter.png') }}"
+            src="{{ url_for('static', filename='images/tweeter.png') }}"
             alt="Twitter"
             style="width: 30px; border-radius: 8px"
         /></a>
         <a
           href="https://www.google.com/search?q=instagram&rlz=1C1KNTJ_enRW1077RW1079&oq=in&gs_lcrp=EgZjaHJvbWUqDQgBEAAYgwEYsQMYgAQyCQgAEEUYORiABDINCAEQABiDARixAxiABDINCAIQABixAxiABBiKBTIQCAMQABiDARixAxiABBiKBTINCAQQABiDARixAxiABDIGCAUQRRg9MgYIBhBFGDwyBggHEEUYPNIBCDM1MjhqMGo3qAIIsAIB&sourceid=chrome&ie=UTF-8"
           ><img
-            src="{{ url_for('static', filename='instagramLog.png') }}"
+            src="{{ url_for('static', filename='images/instagramLog.png') }}"
             alt="Instagram"
             style="width: 30px; border-radius: 8px"
         /></a>

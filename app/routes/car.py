@@ -6,7 +6,7 @@ from app.forms import CarForm
 from app.models import Car, db
 
 
-car_bp = Blueprint("car_bp", __name__)
+car_bp = Blueprint("car", __name__)
 
 
 @car_bp.route("/add_car", methods=["GET", "POST"])
@@ -142,7 +142,7 @@ def delete_car(car_id):
     db.session.delete(car)
     db.session.commit()
     flash("Car record deleted successfully!", "success")
-    return redirect(url_for("car_bp.display_cars"))
+    return redirect(url_for("car.display_cars"))
 
 
 @car_bp.route("/car_all")
