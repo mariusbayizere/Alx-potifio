@@ -377,7 +377,11 @@
         {% for car in cars %}
         <div class="col-md-3 putting-space">
           <div class="card mb-4">
-            <img class="card-img-top" src="{{ car.image }}" alt="Car image" />
+            <img
+              class="card-img-top"
+              src="{{ url_for('static', filename='images/' + car.image) }}"
+              alt="Car image"
+            />
             <div class="card-body">
               <h5 class="card-title">{{ car.make }} {{ car.model }}</h5>
               <p class="card-text">Year: {{ car.years }}</p>

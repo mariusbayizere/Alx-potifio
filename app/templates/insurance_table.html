@@ -111,18 +111,18 @@ content %}
               <tbody>
                 {% for insurance in insurances %}
                 <tr>
-                  <td>{{ insurance.insurance_ID }}</td>
+                  <td>{{ insurance.insurance_id }}</td>
                   <td>{{ insurance.coverage_type }}</td>
                   <td>{{ insurance.Insurance_company }}</td>
                   <td>{{ insurance.premium_amount }}</td>
                   <td class="action-column">
                     <a
-                      href="{{ url_for('insurance.update_insurance', insurance_id=insurance.insurance_ID) }}"
+                      href="{{ url_for('insurance.update_insurance', insurance_id=insurance.insurance_id) }}"
                       class="btn btn-primary btn-sm"
                       >Update</a
                     >
                     <form
-                      action="{{ url_for('insurance.delete_insurance', insurance_id=insurance.insurance_ID) }}"
+                      action="{{ url_for('insurance.delete_insurance', insurance_id=insurance.insurance_id) }}"
                       method="post"
                       style="display: inline"
                     >
