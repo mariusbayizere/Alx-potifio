@@ -1,202 +1,250 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: 'Outfit';
-            background-color: #f8f9fa;
-            overflow: hidden;
-            
-        }
-        .sidebar {
-            height: 100vh;
-            background-color: #37474F;
-            padding: 20px;
-            color: white;
-        }
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            justify-content: center;
-            align-items:center;
-            padding: 10px 70px;
-            border-radius: 30px;
-            background-color: #3D5AFE;
-            margin: 10px 0;
-        }
-        .sidebar h2 {
-            color: white;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        .sidebar .logout {
-            color: white;
-            margin-top: 80px;
-            margin-bottom: 60px;
-            display:flex;
-            padding: 0.5rem 0.7rem;
-            border-radius:25px;
-            background-color:#3D5AFE;
-            justify-content:center;
-        }
-        .sidebar a:hover {
-            background-color: #3D5AFE;
-            text-decoration: none;
-        }
-        .sidebar a:focus {
-            background-color: #448AFF;
-            text-decoration: none;
-        }
-        .content {
-            margin-left: 200px;
-            padding: 20px;
-        }
-        .card {
-            margin-bottom: 20px;
-        }
-        .chart-container {
-            width: 100%;
-            height: 400px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+      body {
+        font-family: 'Outfit';
+        background-color: #f8f9fa;
+        overflow: hidden;
+      }
+      .sidebar {
+        height: 100vh;
+        background-color: #37474f;
+        padding: 20px;
+        color: white;
+      }
+      .sidebar a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 70px;
+        border-radius: 30px;
+        background-color: #3d5afe;
+        margin: 10px 0;
+      }
+      .sidebar h2 {
+        color: white;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .sidebar .logout {
+        color: white;
+        margin-top: 80px;
+        margin-bottom: 60px;
+        display: flex;
+        padding: 0.5rem 0.7rem;
+        border-radius: 25px;
+        background-color: #3d5afe;
+        justify-content: center;
+      }
+      .sidebar a:hover {
+        background-color: #3d5afe;
+        text-decoration: none;
+      }
+      .sidebar a:focus {
+        background-color: #448aff;
+        text-decoration: none;
+      }
+      .content {
+        margin-left: 200px;
+        padding: 20px;
+      }
+      .card {
+        margin-bottom: 20px;
+      }
+      .chart-container {
+        width: 100%;
+        height: 400px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="d-flex">
-        <div class="sidebar">
-            <h2>Dashboard</h2>
-            <a href="#">Dashboard</a>
-            <a href="/insurances">Insurance</a>
-            <a href="/car_all">Cars</a>
-            <a href="/locations">Location</a>
-            <a href="/customers">Customers</a>
-            <a href="/employees">Employees</a>
-            <a href="/rental_table">Rental</a>
-            <a href="/payments">Payment</a>
-            <a href="/maintenance">Maintenance</a>
+      <div class="sidebar">
+        <h2>Dashboard</h2>
+        <a href="#">Dashboard</a>
+        <a href="insurance/insurances">Insurance</a>
+        <a href="car/car_all">Cars</a>
+        <a href="location/locations">Location</a>
+        <a href="customer/customers">Customers</a>
+        <a href="employee/employees">Employees</a>
+        <a href="rental/rental_table">Rental</a>
+        <a href="payments/payments">Payment</a>
+        <a href="maintenance/maintenance">Maintenance</a>
 
-            <a href="/logout" class="logout">Logout</a>
-
-
-
-
-        </div>
-        <div class="content">
-            <h1>Dashboard</h1>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="chart-container">
-                        <canvas id="mainChart"></canvas>
-                    </div>
-                </div>
+        <a href="auth/logout" class="logout">Logout</a>
+      </div>
+      <div class="content">
+        <h1>Dashboard</h1>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="chart-container">
+              <canvas id="mainChart"></canvas>
             </div>
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Shipped Products</h5>
-                            <canvas id="shippedProductsChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">24 Hours Performance</h5>
-                            <canvas id="performanceChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Shipped Products</h5>
+                <canvas id="shippedProductsChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">24 Hours Performance</h5>
+                <canvas id="performanceChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
-        const mainCtx = document.getElementById('mainChart').getContext('2d');
-        const mainChart = new Chart(mainCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Data',
-                    data: [50, 150, 100, 200, 150, 200, 250, 300, 350, 400, 450, 500],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 2,
-                    fill: false,
-                }]
+      const mainCtx = document.getElementById('mainChart').getContext('2d');
+      const mainChart = new Chart(mainCtx, {
+        type: 'line',
+        data: {
+          labels: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+          ],
+          datasets: [
+            {
+              label: 'Data',
+              data: [50, 150, 100, 200, 150, 200, 250, 300, 350, 400, 450, 500],
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 2,
+              fill: false,
             },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
 
-        const shippedProductsCtx = document.getElementById('shippedProductsChart').getContext('2d');
-        const shippedProductsChart = new Chart(shippedProductsCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                    label: 'Shipped Products',
-                    data: [20, 30, 50, 40, 60, 70, 80, 90, 100, 110, 120, 130],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false,
-                }]
+      const shippedProductsCtx = document
+        .getElementById('shippedProductsChart')
+        .getContext('2d');
+      const shippedProductsChart = new Chart(shippedProductsCtx, {
+        type: 'line',
+        data: {
+          labels: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+          ],
+          datasets: [
+            {
+              label: 'Shipped Products',
+              data: [20, 30, 50, 40, 60, 70, 80, 90, 100, 110, 120, 130],
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 2,
+              fill: false,
             },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
 
-        const performanceCtx = document.getElementById('performanceChart').getContext('2d');
-        const performanceChart = new Chart(performanceCtx, {
-            type: 'bar',
-            data: {
-                labels: ['0-1h', '1-2h', '2-3h', '3-4h', '4-5h', '5-6h', '6-7h', '7-8h', '8-9h', '9-10h'],
-                datasets: [{
-                    label: 'Performance',
-                    data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1,
-                }]
+      const performanceCtx = document
+        .getElementById('performanceChart')
+        .getContext('2d');
+      const performanceChart = new Chart(performanceCtx, {
+        type: 'bar',
+        data: {
+          labels: [
+            '0-1h',
+            '1-2h',
+            '2-3h',
+            '3-4h',
+            '4-5h',
+            '5-6h',
+            '6-7h',
+            '7-8h',
+            '8-9h',
+            '9-10h',
+          ],
+          datasets: [
+            {
+              label: 'Performance',
+              data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1,
             },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              beginAtZero: true,
+            },
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
     </script>
-</body>
+  </body>
 </html>
